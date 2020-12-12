@@ -23,7 +23,7 @@ public class Shards : MonoBehaviour
         get => numberOfUnused;
         set
         {
-            numberOfUsed = Mathf.Clamp(value, 0, 11);
+            numberOfUnused = Mathf.Clamp(value, 0, 11);
             SetShards(numberOfUnused, UnusedParent);
         }
     }
@@ -51,9 +51,9 @@ public class Shards : MonoBehaviour
 
     public void SetShards(int value, Transform parent)
     {
-        for (var i = 0; i <= parent.childCount; i++)
+        for (var i = 0; i < parent.childCount; i++)
         {
-            var child = parent.GetChild(i).GetComponent<Star>();
+            var child = parent.GetChild(i);
             child.gameObject.SetActive(i < value);
         }
     }
