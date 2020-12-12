@@ -71,10 +71,18 @@ public class GrowInNumbers : MonoBehaviour
 
     void MoveMousesInPositions()
     {
-        for (int q = 0; q < activeMouses.Count; q++)
+        if (activeMouses.Count == 1)
         {
-            activeMouses[q].localRotation = Quaternion.RotateTowards(activeMouses[q].localRotation, targetRotations[q], 180f * Time.deltaTime);
-            activeMouses[q].localPosition = Vector3.MoveTowards(activeMouses[q].localPosition, Vector3.zero, 15f * Time.deltaTime);
+            activeMouses[0].localRotation = Quaternion.RotateTowards(activeMouses[0].localRotation, targetRotations[0], 180f * Time.deltaTime);
+            activeMouses[0].localPosition = Vector3.MoveTowards(activeMouses[0].localPosition, Vector3.down * 1.5f, 15f * Time.deltaTime);
+        }
+        else
+        {
+            for (int q = 0; q < activeMouses.Count; q++)
+            {
+                activeMouses[q].localRotation = Quaternion.RotateTowards(activeMouses[q].localRotation, targetRotations[q], 180f * Time.deltaTime);
+                activeMouses[q].localPosition = Vector3.MoveTowards(activeMouses[q].localPosition, Vector3.zero, 15f * Time.deltaTime);
+            }
         }
     }
 }

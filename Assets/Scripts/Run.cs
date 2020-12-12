@@ -50,13 +50,13 @@ public class Run : MonoBehaviour
 
        // tr.Translate(new Vector2(Input.GetAxis("Vertical") * 5f, Input.GetAxis("Horizontal") * 5f) * Time.deltaTime);
 
-		if (Input.GetKey("e"))
+		if (Input.GetKey(KeyCode.E))
 		{
-			transform.Rotate(0, 0, -1.0f);
+			transform.Rotate(0, 0, -90.0f * Time.deltaTime);
 		}
-		if (Input.GetKey("q"))
+		if (Input.GetKey(KeyCode.Q))
 		{
-			transform.Rotate(0, 0, 1.0f);
+			transform.Rotate(0, 0, 90.0f * Time.deltaTime);
 		}
 	}
 }
