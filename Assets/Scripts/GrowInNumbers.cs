@@ -9,22 +9,29 @@ public class GrowInNumbers : MonoBehaviour
 
     public List<Quaternion> targetRotations;
 
+    public bool isPlayer;
+
     void Start()
     {
         
     }
 
-    void AddNewMouse(Transform newMouse)
+    public void AddNewMouse(Transform newMouse)
     {
         activeMouses.Add(newMouse);
         targetRotations.Add(new Quaternion());
         //newMouse.tag = "Player";
-        newMouse.GetComponent<Mouse>().mouseType = Mouse.MouseType.connected;
+        newMouse.GetComponent<Mouse>().mouseType = Mouse.MouseType.connected;   
+        if (isPlayer)
+        {
+            newMouse.GetComponent<Mouse>().isAlly = true;
+            newMouse.GetComponent<Mouse>().growInNumbers = this;
+        }
         newMouse.SetParent(transform);
         SetTargetMouseRotations();
     }
         
-    void RemoveMouse(Transform deadMouse)
+    public void RemoveMouse(Transform deadMouse)
     {
         int id = activeMouses.IndexOf(deadMouse);
         targetRotations.RemoveAt(id);
@@ -37,25 +44,11 @@ public class GrowInNumbers : MonoBehaviour
 
     void Update()
     {
-        MoveMousesInPositions();    
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Transform randMouse = RandomFreeMouse();
-            if (randMouse)
-            {
-                AddNewMouse(randMouse);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if (activeMouses.Count > 1)
-            {
-                RemoveMouse(activeMouses[Random.Range(1, activeMouses.Count)]);
-            }
-        }
+        MoveMousesInPositions();         
+
     }
 
-    Transform RandomFreeMouse()
+    public Transform RandomFreeMouse()
     {
         Mouse[] mouses = FindObjectsOfType<Mouse>();
         for (int q=0; q < mouses.Length; q++)
@@ -68,9 +61,9 @@ public class GrowInNumbers : MonoBehaviour
         return null;
     }
 
-    void SetTargetMouseRotations()
+    public void SetTargetMouseRotations()
     {
-        for (int q = 1; q < activeMouses.Count; q++)
+        for (int q = 0; q < activeMouses.Count; q++)
         {
             targetRotations[q] = Quaternion.Euler(0f, 0f, q * 360f / activeMouses.Count);
         }
