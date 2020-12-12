@@ -21,13 +21,22 @@ public class Strash : MonoBehaviour
     float rageFactorGrowSpeed = 0.4f;
     float oldRageFactor = -5f;
 
-    float patrolSpeed = 5f;
-    float chaseSpeed = 10f;
+    float patrolSpeed = 1f;
+    float chaseSpeed = 2f;
+    float minPause = 7f;
     float maxPause = 10f;
-    float rotatingSpeed = 180f;
+    float rotatingSpeed = 120f;
+
+    public enum Status { moving, lookingAround, chase}
+    public Status status;
+    float timer;
+
+    float lookingAroundTimer;
+    float minLookAroundTime = 0.5f;
+    float maxLookAroundTime = 2f;
 
     public Transform[] patrolPoints;
-        
+    int currentPatrolPointId;    
 
     private void Update()
     {
@@ -42,6 +51,7 @@ public class Strash : MonoBehaviour
         else
         {
             rageFactor -= rageFactorGrowSpeed * Time.deltaTime;
+            if (rageFactor < 0) { Patrol(); }
         }
         rageFactor = Mathf.Clamp(rageFactor, 0f, 1f);
         if (rageFactor != oldRageFactor)
@@ -60,13 +70,17 @@ public class Strash : MonoBehaviour
             {
                 float dist = Vector3.Magnitude(transform.position - new Vector3(hit.point.x, hit.point.y, 0f));
                 myCones[q].transform.localScale = Vector3.one * dist * 0.156f; //Слава волшебным цифрам в коде!                
-                Mouse hitMouse = hit.transform.GetComponent<Mouse>();
-                if (hitMouse)
+                if (hit.transform == player)
                 {
-                    if (hitMouse.isAlly)
+                    foundPlayer = true;
+                    /*Mouse hitMouse = hit.transform.GetComponent<Mouse>();
+                    if (hitMouse)
                     {
-                        foundPlayer = true;
-                    }
+                        if (hitMouse.isAlly)
+                        {
+                            foundPlayer = true;
+                        }
+                    }*/
                 }
             }
             else
@@ -85,7 +99,32 @@ public class Strash : MonoBehaviour
 
     void Patrol()
     {
-
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            if (status == Status.lookingAround) { status = Status.moving; } else { status = Status.lookingAround; }
+            timer = Random.Range(minPause, maxPause);
+        }
+        if (status == Status.lookingAround)
+        {
+            lookingAroundTimer -= Time.deltaTime;
+            if (lookingAroundTimer < 0)
+            {
+                lookingAroundTimer = Random.Range(minLookAroundTime, maxLookAroundTime);
+                rotatingSpeed = -rotatingSpeed;
+            }
+            transform.Rotate(0f, 0f, rotatingSpeed * Time.deltaTime);
+        }
+        else
+        {
+            if (status == Status.moving)
+            {
+                transform.up = Vector3.Lerp(transform.up, patrolPoints[currentPatrolPointId].position - transform.position, Time.deltaTime * 0.8f);
+                transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPatrolPointId].position, patrolSpeed * Time.deltaTime);
+                if (Vector3.SqrMagnitude(transform.position - patrolPoints[currentPatrolPointId].position) < 0.1f) currentPatrolPointId++;
+                if (currentPatrolPointId >= patrolPoints.Length) currentPatrolPointId = 0;
+            }
+        }
     }
 
     void ColorizeCones()
