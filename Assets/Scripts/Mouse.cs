@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mouse : MonoBehaviour
 {
-    public enum MouseType { free, connected, runningAway}
+    public enum MouseType { free, connected, runningAway, guard}
 
     public int mouseColorId;
 
@@ -24,6 +24,7 @@ public class Mouse : MonoBehaviour
         mouseType = MouseType.runningAway;
         isAlly = false;
         isEnemy = false;
+        transform.SetParent(null);
         targetPointToRunAway = transform.position + transform.up * 99999f;//Vector3.ProjectOnPlane(Random.onUnitSphere, Vector3.forward).normalized * 9999f;
     }
 
@@ -52,7 +53,10 @@ public class Mouse : MonoBehaviour
                 {
                     if (mouseColorId == hittedMouse.mouseColorId)
                     {
-                        hittedMouse.growInNumbers.RemoveMouse(hittedMouse.transform);
+                        if (hittedMouse.growInNumbers)
+                        {
+                            hittedMouse.growInNumbers.RemoveMouse(hittedMouse.transform);
+                        }
                     }
                     else
                     {

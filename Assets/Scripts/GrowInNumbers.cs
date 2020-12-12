@@ -35,8 +35,7 @@ public class GrowInNumbers : MonoBehaviour
     {
         int id = activeMouses.IndexOf(deadMouse);
         targetRotations.RemoveAt(id);
-        activeMouses.RemoveAt(id);
-        deadMouse.SetParent(null);
+        activeMouses.RemoveAt(id);        
         //deadMouse.tag = "Untagged"; //от тагов отказаться потом
         deadMouse.GetComponent<Mouse>().RunAway();
         SetTargetMouseRotations();
