@@ -19,37 +19,25 @@ public class Strash : MonoBehaviour
     bool foundPlayer = false;
     float rageFactor = 0f;
     float rageFactorGrowSpeed = 0.4f;
-    float oldRageFactor = 0f;
+    float oldRageFactor = -5f;
+
+    float patrolSpeed = 5f;
+    float chaseSpeed = 10f;
+    float maxPause = 10f;
+    float rotatingSpeed = 180f;
+
+    public Transform[] patrolPoints;
+        
 
     private void Update()
     {
         foundPlayer = false;
-        List<RaycastHit2D> raycastHit2D = new List<RaycastHit2D>();
-        for (int q = 0; q < myCones.Length; q++)
-        {            
-            //Physics2D.Raycast(Guard.position, myCones[q].transform.up, contactFilter, raycastHit2D, 15f);
-            RaycastHit2D hit = Physics2D.Raycast(Guard.position, myCones[q].transform.up, 6f);
-            if (hit)
-            {
-                float dist = Vector3.Magnitude(transform.position - new Vector3(hit.point.x, hit.point.y, 0f));
-                myCones[q].transform.localScale = Vector3.one * dist * 0.156f; //Слава волшебным цифрам в коде!                
-                Mouse hitMouse = hit.transform.GetComponent<Mouse>();
-                if (hitMouse)
-                {
-                    if (hitMouse.isAlly)
-                    {
-                        foundPlayer = true;                        
-                    }
-                }                     
-            }
-            else
-            {
-                myCones[q].transform.localScale = Vector3.one;
-            }
-        }
+        CheckRaycasts();
+       
         if (foundPlayer)
         {
             rageFactor += rageFactorGrowSpeed * Time.deltaTime;
+            ChasePlayer();
         }
         else
         {
@@ -63,6 +51,42 @@ public class Strash : MonoBehaviour
         }        
     }
 
+    void CheckRaycasts()
+    {
+        for (int q = 0; q < myCones.Length; q++)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Guard.position, myCones[q].transform.up, 6f);
+            if (hit)
+            {
+                float dist = Vector3.Magnitude(transform.position - new Vector3(hit.point.x, hit.point.y, 0f));
+                myCones[q].transform.localScale = Vector3.one * dist * 0.156f; //Слава волшебным цифрам в коде!                
+                Mouse hitMouse = hit.transform.GetComponent<Mouse>();
+                if (hitMouse)
+                {
+                    if (hitMouse.isAlly)
+                    {
+                        foundPlayer = true;
+                    }
+                }
+            }
+            else
+            {
+                myCones[q].transform.localScale = Vector3.one;
+            }
+        }
+    }
+
+    void ChasePlayer()
+    {
+        transform.up = Vector3.Lerp(transform.up, (player.position - transform.position), Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, player.position, chaseSpeed * Time.deltaTime);
+    }
+
+
+    void Patrol()
+    {
+
+    }
 
     void ColorizeCones()
     {
@@ -90,10 +114,15 @@ public class Strash : MonoBehaviour
         }
     }*/
 
+    private void Start()
+    {
+        player = FindObjectOfType<Run>().transform;
+    }
+
     void Luch()
     {
         Debug.Log("asdfasd");
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = FindObjectOfType<Run>().transform;
         Vector3 difference = player.position - transform.position;
         float rotateZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         Physics2D.Raycast(Guard.position, Vector2.right * transform.localScale.z);
