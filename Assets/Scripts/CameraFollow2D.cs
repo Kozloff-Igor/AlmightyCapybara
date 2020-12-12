@@ -5,7 +5,7 @@ public class CameraFollow2D : MonoBehaviour {
 
 	public float damping = 1.5f;
 	public Vector2 offset = new Vector2(2f, 1f);
-	private Transform player;
+	public Transform player;
 	private int lastX;
 
 	void Start ()

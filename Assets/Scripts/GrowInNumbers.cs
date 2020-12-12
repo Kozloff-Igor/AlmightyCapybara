@@ -18,12 +18,23 @@ public class GrowInNumbers : MonoBehaviour
     {
         activeMouses.Add(newMouse);
         targetRotations.Add(new Quaternion());
-        newMouse.tag = "Player";
+        //newMouse.tag = "Player";
         newMouse.GetComponent<Mouse>().mouseType = Mouse.MouseType.connected;
         newMouse.SetParent(transform);
         SetTargetMouseRotations();
     }
         
+    void RemoveMouse(Transform deadMouse)
+    {
+        int id = activeMouses.IndexOf(deadMouse);
+        targetRotations.RemoveAt(id);
+        activeMouses.RemoveAt(id);
+        deadMouse.SetParent(null);
+        //deadMouse.tag = "Untagged"; //от тагов отказаться потом
+        deadMouse.GetComponent<Mouse>().RunAway();
+        SetTargetMouseRotations();
+    }
+
     void Update()
     {
         MoveMousesInPositions();    
@@ -33,6 +44,13 @@ public class GrowInNumbers : MonoBehaviour
             if (randMouse)
             {
                 AddNewMouse(randMouse);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (activeMouses.Count > 1)
+            {
+                RemoveMouse(activeMouses[Random.Range(1, activeMouses.Count)]);
             }
         }
     }

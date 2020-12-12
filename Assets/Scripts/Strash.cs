@@ -11,10 +11,20 @@ public class Strash : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D myCollider)
     {
-        if (myCollider.tag == ("Player"))
+        Debug.Log(myCollider.name, myCollider.gameObject);
+        Mouse mouse = myCollider.GetComponent<Mouse>();
+        if (mouse)
+        {
+            if (mouse.isPlayer)
+            {
+                Debug.Log("ASDFASDFASDF");
+            }
+        }
+
+       /* if (myCollider.tag == ("Player"))
         {
             Luch();
-        }
+        }*/
     }
 
     void Luch()
