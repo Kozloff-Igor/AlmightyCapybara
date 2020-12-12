@@ -22,7 +22,7 @@ public class Strash : MonoBehaviour
     float oldRageFactor = -5f;
 
     float patrolSpeed = 1f;
-    float chaseSpeed = 2f;
+    float chaseSpeed = 3f;
     float minPause = 7f;
     float maxPause = 10f;
     float rotatingSpeed = 120f;
@@ -32,8 +32,8 @@ public class Strash : MonoBehaviour
     float timer;
 
     float lookingAroundTimer;
-    float minLookAroundTime = 0.5f;
-    float maxLookAroundTime = 2f;
+    float minLookAroundTime = 3f;
+    float maxLookAroundTime = 5f;
 
     public Transform[] patrolPoints;
     int currentPatrolPointId;    
@@ -69,7 +69,7 @@ public class Strash : MonoBehaviour
             if (hit)
             {
                 float dist = Vector3.Magnitude(transform.position - new Vector3(hit.point.x, hit.point.y, 0f));
-                myCones[q].transform.localScale = Vector3.one * dist * 0.156f; //Слава волшебным цифрам в коде!                
+                myCones[q].transform.localScale = Vector3.one * dist * 0.15f; //Слава волшебным цифрам в коде!                
                 if (hit.transform == player)
                 {
                     foundPlayer = true;
