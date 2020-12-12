@@ -190,15 +190,26 @@ public class DialogueController : MonoBehaviour
 
     IEnumerator ShowCharacter(Character charr, float offsetX, float speed, Func<float, float, bool> f)
     {
-        var charTransform = charr.transform;
-        var oldPosition = charTransform.position;
-        charTransform.position = new Vector3(oldPosition.x + offsetX, oldPosition.y, oldPosition.z);
-        while (f(charTransform.position.x, oldPosition.x))
+        var charTransform = charr.GetComponent<RectTransform>();
+        var oldPosition = charTransform.anchoredPosition;
+        var startX = oldPosition.x;
+        charTransform.anchoredPosition = new Vector2(oldPosition.x + offsetX, oldPosition.y);
+        while (f(charTransform.anchoredPosition.x, startX))
         {
             yield return new WaitForFixedUpdate();
-            charTransform.position = new Vector3(charTransform.position.x + speed * Time.fixedDeltaTime, oldPosition.y, oldPosition.z);
+            charTransform.anchoredPosition = new Vector2(charTransform.anchoredPosition.x + speed * Time.fixedDeltaTime, oldPosition.y);
         }
         CharIsReady();
+        //var charTransform = charr.GetComponent<RectTransform>();
+        //var oldPosition = charTransform.anchoredPosition;
+        //var startX = oldPosition.x;
+        //charTransform.position = new Vector3(oldPosition.x + offsetX, oldPosition.y, oldPosition.z);
+        //while (f(charTransform.position.x, startX))
+        //{
+        //    yield return new WaitForFixedUpdate();
+        //    charTransform.position = new Vector3(charTransform.position.x + speed * Time.fixedDeltaTime, oldPosition.y, oldPosition.z);
+        //}
+        //CharIsReady();
     }
 
     void CharIsReady()
