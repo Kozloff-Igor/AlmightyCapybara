@@ -4,6 +4,8 @@ using System;
 using Ink.Runtime;
 using TMPro;
 using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
 
 public class DialogueController : MonoBehaviour
 {
@@ -30,8 +32,8 @@ public class DialogueController : MonoBehaviour
     private Button buttonPrefab = null;
     [SerializeField]
     private Button buttonContinue = null;
-    //[SerializeField]
-    //private TextMeshProUGUI currentText = null;
+
+    private int charsIsReady = 0;
 
 
     void Awake()
@@ -44,7 +46,10 @@ public class DialogueController : MonoBehaviour
     {
         story = new Story(inkJSONAsset.text);
         if (OnCreateStory != null) OnCreateStory(story);
-        RefreshView();
+        charsIsReady = 0;
+        StartCoroutine(ShowCharacter(leftCharacter, -600f, 600f, (x, y) => (x < y)));
+        StartCoroutine(ShowCharacter(rightCharacter, 600f, -600f, (x, y) => (x > y)));
+        //RefreshView();
     }
 
     void RefreshView()
@@ -111,13 +116,13 @@ public class DialogueController : MonoBehaviour
         // storyText.text = text;
         // storyText.transform.SetParent(canvas.transform, false);
 
-        if (story.currentTags.FirstOrDefault(tag => tag == "left") != null)
+        if (story.currentTags.Contains("left"))
         {
             leftCharacter.ShowText(text);
             rightCharacter.HideText();
         }
 
-        if (story.currentTags.FirstOrDefault(tag => tag == "right") != null)
+        if (story.currentTags.Contains("right"))
         {
             rightCharacter.ShowText(text);
             leftCharacter.HideText();
@@ -136,12 +141,12 @@ public class DialogueController : MonoBehaviour
             name = nameWithSprite.Substring(0, index);
             Int32.TryParse(nameWithSprite.Substring(index + 1, 1), out spriteIndex);
         }
-        if (story.currentTags.FirstOrDefault(tag => tag == "left") != null)
+        if (story.currentTags.Contains("left"))
         {
 
         }
 
-        if (story.currentTags.FirstOrDefault(tag => tag == "right") != null)
+        if (story.currentTags.Contains("right"))
         {
 
         }
@@ -171,4 +176,25 @@ public class DialogueController : MonoBehaviour
         }
     }
 
+    IEnumerator ShowCharacter(Character charr, float offsetX, float speed, Func<float, float, bool> f)
+    {
+        var charTransform = charr.transform;
+        var oldPosition = charTransform.position;
+        charTransform.position = new Vector3(oldPosition.x + offsetX, oldPosition.y, oldPosition.z);
+        while (f(charTransform.position.x, oldPosition.x))
+        {
+            yield return new WaitForFixedUpdate();
+            charTransform.position = new Vector3(charTransform.position.x + speed * Time.fixedDeltaTime, oldPosition.y, oldPosition.z);
+        }
+        CharIsReady();
+    }
+
+    void CharIsReady()
+    {
+        charsIsReady++;
+        if (charsIsReady == 2)
+        {
+            RefreshView();
+        }
+    }
 }
