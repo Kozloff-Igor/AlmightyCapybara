@@ -29,7 +29,7 @@ public class DialogueController : MonoBehaviour
     //[SerializeField]
     //private Text textPrefab = null;
     [SerializeField]
-    private Button buttonPrefab = null;
+    private Button[] choices;
     [SerializeField]
     private Button buttonContinue = null;
 
@@ -56,6 +56,10 @@ public class DialogueController : MonoBehaviour
     {
         // Remove all the UI on screen
         //RemoveChildren();
+        foreach(var choice in choices)
+        {
+            choice.gameObject.SetActive(false);
+        }
 
         if (story.canContinue)
         {
@@ -75,10 +79,11 @@ public class DialogueController : MonoBehaviour
 
         if (story.currentChoices.Count > 0)
         {
+            buttonContinue.gameObject.SetActive(false);
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 Choice choice = story.currentChoices[i];
-                Button button = CreateChoiceView(choice.text.Trim());
+                Button button = GetChoiceView(choice.text.Trim(), i);
                 button.onClick.AddListener(delegate
                 {
                     OnClickChoiceButton(choice);
@@ -107,6 +112,7 @@ public class DialogueController : MonoBehaviour
     void OnClickChoiceButton(Choice choice)
     {
         story.ChooseChoiceIndex(choice.index);
+        story.Continue();
         RefreshView();
     }
 
@@ -153,16 +159,22 @@ public class DialogueController : MonoBehaviour
 
     }
 
-    Button CreateChoiceView(string text)
+    Button GetChoiceView(string text, int index)
     {
-        Button choice = Instantiate(buttonPrefab) as Button;
-        choice.transform.SetParent(canvas.transform, false);
+        //Button choice = Instantiate(buttonPrefab) as Button;
+        //choice.transform.SetParent(leftCharacter.transform, false);
+        //choice.gameObject.SetActive(true);
 
-        Text choiceText = choice.GetComponentInChildren<Text>();
+        //TextMeshProUGUI choiceText = choice.GetComponentInChildren<TextMeshProUGUI>();
+        //choiceText.text = text;
+
+        //HorizontalLayoutGroup layoutGroup = choice.GetComponent<HorizontalLayoutGroup>();
+        //layoutGroup.childForceExpandHeight = false;
+        var choice = choices[index];
+        choice.gameObject.SetActive(true);
+
+        TextMeshProUGUI choiceText = choice.GetComponentInChildren<TextMeshProUGUI>();
         choiceText.text = text;
-
-        HorizontalLayoutGroup layoutGroup = choice.GetComponent<HorizontalLayoutGroup>();
-        layoutGroup.childForceExpandHeight = false;
 
         return choice;
     }
