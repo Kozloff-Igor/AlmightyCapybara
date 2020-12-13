@@ -18,7 +18,7 @@ public class ArrowPointer : MonoBehaviour
         closestMouse = ClosestInList(mouses);
         if (closestMouse)
         {            
-            arrowToMouses.up = closestMouse.position - transform.position;
+            arrowToMouses.up = Vector3.Lerp(arrowToMouses.up, closestMouse.position + Vector3.up * 1.3f - transform.position, Time.deltaTime);
         } else
         {
             arrowToMouses.gameObject.SetActive(false);
@@ -26,7 +26,7 @@ public class ArrowPointer : MonoBehaviour
         closestShard = ClosestInList(shards);
         if (closestShard)
         {
-            arrowToShard.up = closestShard.position - transform.position;
+            arrowToShard.up = Vector3.Lerp(arrowToShard.up, closestShard.position - transform.position, Time.deltaTime);
         } else
         {
             arrowToShard.gameObject.SetActive(false);

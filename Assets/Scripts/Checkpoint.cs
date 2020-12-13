@@ -29,6 +29,7 @@ public class Checkpoint : MonoBehaviour
             if (!player.activeMouses.Contains(mouse))
             {
                 player.AddNewMouse(mouse);
+                mouse.transform.position = player.transform.position;
             }
         }
 

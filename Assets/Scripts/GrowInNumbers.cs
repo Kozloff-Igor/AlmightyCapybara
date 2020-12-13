@@ -24,6 +24,7 @@ public class GrowInNumbers : MonoBehaviour
         newMouse.GetComponent<Mouse>().mouseType = Mouse.MouseType.connected;   
         if (isPlayer)
         {
+            newMouse.GetComponent<Collider2D>().enabled = true;
             newMouse.GetComponent<Mouse>().isAlly = true;
             newMouse.GetComponent<Mouse>().growInNumbers = this;
         }
