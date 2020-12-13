@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LineController : MonoBehaviour
 {
+    public event Action onClose;
     private LineRenderer lineRenderer;
     private bool isDrawing;
     private List<string> stars = new List<string>();
@@ -84,18 +86,19 @@ public class LineController : MonoBehaviour
         stars.Clear();
         lineRenderer.positionCount = 0;
         isDrawing = false;
-        
+
     }
 
     void Win()
     {
-        Text.gameObject.SetActive(true);
-        Text.text = "Win";
+        //Text.gameObject.SetActive(true);
+        //Text.text = "Win";
 
         for (var i = 0; i < transform.childCount; i++)
         {
             StartCoroutine(FlashingOne(i));
         }
+        Invoke("Close", 0.5f);
     }
 
     IEnumerator Flashing()
@@ -143,5 +146,14 @@ public class LineController : MonoBehaviour
             child.localScale = new Vector3(Mathf.Clamp(child.localScale.x - Time.deltaTime * 5, 1f, 5f), Mathf.Clamp(child.localScale.y - Time.deltaTime * 5, 1f, 5f), 1);
             time -= Time.deltaTime;
         }
+    }
+
+    void Close()
+    {
+        if (onClose != null)
+        {
+            onClose.Invoke();
+        }
+        Destroy(transform.parent.gameObject);
     }
 }
