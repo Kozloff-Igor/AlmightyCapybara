@@ -18,10 +18,10 @@ public class FinalText : MonoBehaviour
     {
         if (isEnd)
         {
-            while (image.color.a < 1f)
+            if (image.color.a < 1f)
             {
-                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + Time.deltaTime * 0.01f);
-                image2.color = new Color(image2.color.r, image2.color.g, image2.color.b, image2.color.a + Time.deltaTime * 0.01f);
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + Time.deltaTime*0.1f);
+                image2.color = new Color(image2.color.r, image2.color.g, image2.color.b, image2.color.a + Time.deltaTime * 0.1f);
             }
         }
     }
