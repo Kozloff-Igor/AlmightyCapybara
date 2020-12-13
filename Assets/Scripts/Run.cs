@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Run : MonoBehaviour
 {
-
+    Vector3 littleOffset = new Vector3(0.01f, 0.011f, 0);
     Rigidbody2D rb;
     Transform tr;
-
+    Vector3 direction;
     GrowInNumbers growInNumbers;
     Hypnosis hypnosis;
 
@@ -23,7 +23,13 @@ public class Run : MonoBehaviour
     {
         rb.velocity = new Vector2(0f, 0f);
         transform.Rotate(0, 0, 0);
-
+        if (growInNumbers.activeMouses.Count == 1)
+        {
+            if (direction != Vector3.zero)
+            {
+                transform.up = Vector3.Lerp(transform.up, direction + littleOffset, Time.deltaTime * 10f);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -54,7 +60,7 @@ public class Run : MonoBehaviour
     {
         rb.velocity = new Vector2(Input.GetAxis("Vertical") * 5f, rb.velocity.y);
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * 5f, rb.velocity.x);
-
+        direction = rb.velocity.normalized;
         // tr.Translate(new Vector2(Input.GetAxis("Vertical") * 5f, Input.GetAxis("Horizontal") * 5f) * Time.deltaTime);
 
         if (Input.GetKey(KeyCode.E))
