@@ -28,7 +28,7 @@ public class Strash : MonoBehaviour
     float maxPause = 10f;
     float rotatingSpeed = 120f;
 
-    public enum Status { moving, lookingAround, chase}
+    public enum Status { moving, lookingAround, chase }
     public Status status;
     float timer;
 
@@ -47,7 +47,7 @@ public class Strash : MonoBehaviour
     {
         foundPlayer = false;
         CheckRaycasts();
-       
+
         if (foundPlayer)
         {
             rageFactor += rageFactorGrowSpeed * Time.deltaTime;
@@ -63,6 +63,14 @@ public class Strash : MonoBehaviour
         {
             ColorizeCones();
             oldRageFactor = rageFactor;
+        }
+        if (!alarm && foundPlayer)
+        {
+            GetComponentInParent<AudioSource>().Play();
+        }
+        if (alarm && !foundPlayer)
+        {
+            GetComponentInParent<AudioSource>().Stop();
         }
         alarm = foundPlayer;
         CheckAnimations();
@@ -139,7 +147,7 @@ public class Strash : MonoBehaviour
 
     void ColorizeCones()
     {
-        for (int q=0;q<myCones.Length;q++)
+        for (int q = 0; q < myCones.Length; q++)
         {
             myCones[q].color = Color.Lerp(calm, rage, rageFactor);
         }
@@ -183,7 +191,7 @@ public class Strash : MonoBehaviour
     {
         if (alarm)
         {
-            if(animation.AnimationName != "ALERT!")
+            if (animation.AnimationName != "ALERT!")
                 animation.AnimationName = "ALERT!";
         }
         else

@@ -25,6 +25,7 @@ public class Shards : MonoBehaviour
         {
             numberOfUnused = Mathf.Clamp(value, 0, 11);
             SetShards(numberOfUnused, UnusedParent);
+            GetComponent<AudioSource>().Play();
         }
     }
 

@@ -19,6 +19,8 @@ public class King : MonoBehaviour
     Rigidbody2D rb;
     Vector3 startPosition;
     SkeletonAnimation animation;
+
+    bool musicIsPlaying;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,9 +71,20 @@ public class King : MonoBehaviour
                 {
                     rb.velocity = direction * speed;
                 }
+                if (!musicIsPlaying)
+                {
+                    musicIsPlaying = true;
+                    FindObjectOfType<MainSound>().PlayBossTheme(true);
+                }
             }
             else
             {
+                if (distance > 30f && musicIsPlaying)
+                {
+                    musicIsPlaying = false;
+                    FindObjectOfType<MainSound>().PlayBossTheme(false);
+                }
+
                 needRotate = false;
                 rb.velocity = Vector2.zero;
                 if (animation.AnimationName != "idle")

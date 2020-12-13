@@ -73,7 +73,7 @@ public class LineController : MonoBehaviour
         for (var i = 0; i < Task.Length; i++)
         {
             var child = Task[i];
-            if (stars[i]!= child.name)
+            if (stars[i] != child.name)
             {
                 Lose();
                 return;
@@ -108,7 +108,7 @@ public class LineController : MonoBehaviour
 
     IEnumerator Flashing()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
 
         for (var i = 0; i < Task.Length; i++)
         {
@@ -159,6 +159,7 @@ public class LineController : MonoBehaviour
         {
             onClose.Invoke();
         }
+        FindObjectOfType<Hypnosis>().CompleteHypnosis();
         Destroy(transform.parent.gameObject);
     }
 }

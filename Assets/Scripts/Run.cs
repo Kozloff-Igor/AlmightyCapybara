@@ -33,11 +33,7 @@ public class Run : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            var newMouse = hypnosis.Hypnotize();
-            if (newMouse)
-            {
-                growInNumbers.AddNewMouse(newMouse.transform);
-            }
+            hypnosis.Hypnotize();
             //Transform randMouse = growInNumbers.RandomFreeMouse();
             //if (randMouse)
             //{
