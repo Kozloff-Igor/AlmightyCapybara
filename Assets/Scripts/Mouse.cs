@@ -71,6 +71,10 @@ public class Mouse : MonoBehaviour
                         if (hittedMouse.growInNumbers)
                         {
                             hittedMouse.growInNumbers.RemoveMouse(hittedMouse.transform);
+                            if (growInNumbers.activeMouses.Count == 0)
+                            {
+                                FindObjectOfType<Run>().FinishGame();
+                            }
                         }
                     }
                     else
