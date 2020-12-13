@@ -6,7 +6,7 @@ using UnityEditor;
 public static class AwesomeMapCreator
 {
     static bool buildingIsOn = false;
-        
+#if UNITY_EDITOR  
     [MenuItem("My Commands/First Command _b")]
     static void FirstCommand()
     {
@@ -35,5 +35,5 @@ public static class AwesomeMapCreator
     }
 
 
-
+#endif
 }
