@@ -40,6 +40,7 @@ public class Run : MonoBehaviour
             //    growInNumbers.AddNewMouse(randMouse);
             //}
         }
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Z))
         {
             if (growInNumbers.activeMouses.Count > 1)
@@ -47,6 +48,7 @@ public class Run : MonoBehaviour
                 growInNumbers.RemoveMouse(growInNumbers.activeMouses[Random.Range(1, growInNumbers.activeMouses.Count)]);
             }
         }
+#endif
 
     }
 

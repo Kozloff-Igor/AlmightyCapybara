@@ -53,7 +53,7 @@ public class Mouse : MonoBehaviour
         if (mouseType == MouseType.runningAway)
         {
             //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetPointToRunAway, Vector3.back), 270f * Time.deltaTime);
-            transform.position = Vector3.MoveTowards(transform.position, targetPointToRunAway, 40f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPointToRunAway, 15f * Time.deltaTime);
         }
     }
 
