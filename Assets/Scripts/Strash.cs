@@ -23,7 +23,7 @@ public class Strash : MonoBehaviour
     float oldRageFactor = -5f;
 
     float patrolSpeed = 1f;
-    float chaseSpeed = 3f;
+    float chaseSpeed = 5f;
     float minPause = 7f;
     float maxPause = 10f;
     float rotatingSpeed = 120f;
