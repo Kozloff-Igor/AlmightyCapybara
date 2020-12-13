@@ -58,6 +58,7 @@ public class Strash : MonoBehaviour
             rageFactor -= rageFactorGrowSpeed * Time.deltaTime;
             if (rageFactor < 0) { Patrol(); }
         }
+        CheckLose();
         rageFactor = Mathf.Clamp(rageFactor, 0f, 1f);
         if (rageFactor != oldRageFactor)
         {
@@ -211,6 +212,15 @@ public class Strash : MonoBehaviour
     {
         currentPatrolPointId = 0;
         transform.position = startPosition;
+    }
+
+    void CheckLose()
+    {
+        if (rageFactor >= 1f)
+        {
+            if(Checkpoint.lastCheckpoint)
+            Checkpoint.lastCheckpoint.Reburn(player.GetComponent<GrowInNumbers>());
+        }
     }
 }
 

@@ -29,7 +29,7 @@ public class Mouse : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
             }
         }
         else

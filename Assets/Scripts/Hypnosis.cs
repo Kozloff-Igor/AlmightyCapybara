@@ -39,7 +39,7 @@ public class Hypnosis : MonoBehaviour
 
     public void Hypnotize()
     {
-        if (candidates.Count == 0)
+        if (candidates.Count == 0 || Shards.instance.NumberOfUnused <= Shards.instance.NumberOfUsed)
             return;
 
         FindObjectOfType<Puzzle>().StartPuzzle();
