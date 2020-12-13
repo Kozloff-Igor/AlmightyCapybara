@@ -11,7 +11,7 @@ public class LineController : MonoBehaviour
     private List<string> stars = new List<string>();
     private int starAmount;
 
-    public Star[] Task;
+    public GameObject[] Task;
     [SerializeField]
     private TMPro.TextMeshProUGUI Text;
 
@@ -24,7 +24,7 @@ public class LineController : MonoBehaviour
     {
         if (!isDrawing)
         {
-            starAmount = GetComponentsInChildren<Star>().Length;
+            starAmount = Task.Length;//GetComponentsInChildren<Star>().Length;
             lineRenderer.positionCount = 2;
             lineRenderer.SetPosition(0, new Vector3(star.transform.position.x, star.transform.position.y, 0));
             isDrawing = true;
@@ -34,7 +34,7 @@ public class LineController : MonoBehaviour
 
     public void AddStar(Star star)
     {
-        if (isDrawing && !stars.Contains(star.gameObject.name))
+        if (isDrawing)
         {
             stars.Add(star.gameObject.name);
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, new Vector3(star.transform.position.x, star.transform.position.y, 0));
@@ -70,10 +70,10 @@ public class LineController : MonoBehaviour
 
     public void CompletePuzzle()
     {
-        for (var i = 0; i < transform.childCount; i++)
+        for (var i = 0; i < Task.Length; i++)
         {
-            var child = transform.GetChild(i).GetComponent<Star>();
-            if (stars.IndexOf(child.gameObject.name) != i)
+            var child = Task[i];
+            if (stars[i]!= child.name)
             {
                 Lose();
                 return;
@@ -91,6 +91,7 @@ public class LineController : MonoBehaviour
         lineRenderer.positionCount = 0;
         isDrawing = false;
 
+        StartPuzzle();
     }
 
     void Win()
@@ -107,11 +108,11 @@ public class LineController : MonoBehaviour
 
     IEnumerator Flashing()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
 
-        for (var i = 0; i < transform.childCount; i++)
+        for (var i = 0; i < Task.Length; i++)
         {
-            var child = transform.GetChild(i);
+            var child = Task[i].transform;
             var time = 0.3f;
             while (time > 0)
             {
