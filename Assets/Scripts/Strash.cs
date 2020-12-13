@@ -70,29 +70,32 @@ public class Strash : MonoBehaviour
 
     void CheckRaycasts()
     {
-        for (int q = 0; q < myCones.Length; q++)
+        if (Vector3.SqrMagnitude(transform.position - player.position) < 800f)
         {
-            RaycastHit2D hit = Physics2D.Raycast(Guard.position, myCones[q].transform.up, 6f);
-            if (hit)
+            for (int q = 0; q < myCones.Length; q++)
             {
-                float dist = Vector3.Magnitude(transform.position - new Vector3(hit.point.x, hit.point.y, 0f));
-                myCones[q].transform.localScale = Vector3.one * dist * 0.15f; //Слава волшебным цифрам в коде!                
-                if (hit.transform == player)
+                RaycastHit2D hit = Physics2D.Raycast(Guard.position, myCones[q].transform.up, 6f);
+                if (hit)
                 {
-                    foundPlayer = true;
-                    /*Mouse hitMouse = hit.transform.GetComponent<Mouse>();
-                    if (hitMouse)
+                    float dist = Vector3.Magnitude(transform.position - new Vector3(hit.point.x, hit.point.y, 0f));
+                    myCones[q].transform.localScale = Vector3.one * dist * 0.15f; //Слава волшебным цифрам в коде!                
+                    if (hit.transform == player)
                     {
-                        if (hitMouse.isAlly)
+                        foundPlayer = true;
+                        /*Mouse hitMouse = hit.transform.GetComponent<Mouse>();
+                        if (hitMouse)
                         {
-                            foundPlayer = true;
-                        }
-                    }*/
+                            if (hitMouse.isAlly)
+                            {
+                                foundPlayer = true;
+                            }
+                        }*/
+                    }
                 }
-            }
-            else
-            {
-                myCones[q].transform.localScale = Vector3.one;
+                else
+                {
+                    myCones[q].transform.localScale = Vector3.one;
+                }
             }
         }
     }
