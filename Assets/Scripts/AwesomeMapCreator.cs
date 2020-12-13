@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public static class AwesomeMapCreator
+//public static class AwesomeMapCreator
+    public class AwesomeMapCreator : MonoBehaviour
 {
    /* static bool buildingIsOn = false;
 #if UNITY_EDITOR  
