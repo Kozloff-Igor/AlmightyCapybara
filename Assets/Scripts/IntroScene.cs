@@ -1,18 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IntroScene : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Image image;
+
     void Start()
     {
-        
+        image = GetComponent<Image>();
+    }
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(Close());
+            //Invoke("GoNext", 0.6f);
+        }
+    }
+    public void GoNext()
+    {
+        SceneManager.LoadScene(1);
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Close()
     {
-        
+        while (image.color.a < 1f)
+        {
+            yield return new WaitForEndOfFrame();
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a + Time.deltaTime);
+        }
+        GoNext();
     }
 }
+
