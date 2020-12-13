@@ -46,7 +46,7 @@ public class Mouse : MonoBehaviour
     {
         if (isAlly)
         {
-            Mouse hittedMouse = collision.gameObject.GetComponent<Mouse>();
+            Mouse hittedMouse = collision.collider.gameObject.GetComponent<Mouse>();
             if (hittedMouse)
             {
                 if (hittedMouse.isEnemy)
