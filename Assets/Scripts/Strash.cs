@@ -41,6 +41,8 @@ public class Strash : MonoBehaviour
 
     SkeletonAnimation animation;
     bool alarm;
+
+    Vector3 startPosition;
     private void Update()
     {
         foundPlayer = false;
@@ -162,6 +164,7 @@ public class Strash : MonoBehaviour
     {
         player = FindObjectOfType<Run>().transform;
         animation = GetComponentInChildren<SkeletonAnimation>();
+        startPosition = transform.position;
     }
 
     void Luch()
@@ -191,6 +194,12 @@ public class Strash : MonoBehaviour
                 animation.AnimationName = "idle";
             }
         }
+    }
+
+    public void Reload()
+    {
+        currentPatrolPointId = 0;
+        transform.position = startPosition;
     }
 }
 
