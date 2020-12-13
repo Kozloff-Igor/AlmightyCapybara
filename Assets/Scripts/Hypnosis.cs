@@ -53,6 +53,7 @@ public class Hypnosis : MonoBehaviour
         if (mouse)
         {
             Shards.instance.NumberOfUsed++;
+            FindObjectOfType<ArrowPointer>().MouseHypnotized(mouse.transform);
             GetComponent<GrowInNumbers>().AddNewMouse(mouse.transform);
             GetComponent<AudioSource>().clip = clip;
             GetComponent<AudioSource>().Play();

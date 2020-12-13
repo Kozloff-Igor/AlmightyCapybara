@@ -8,8 +8,9 @@ public class Shard : MonoBehaviour
     {
         if (collision.transform.GetComponentInParent<Run>())
         {
+            FindObjectOfType<ArrowPointer>().ShardCollected(transform);
             Shards.instance.NumberOfUnused++;
-            Destroy(gameObject);
+            Destroy(gameObject);            
         }
     }
 }
