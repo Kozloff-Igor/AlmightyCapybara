@@ -1,0 +1,20 @@
+{ "skeleton": { "images": "/d/informarion/creativity/art/projects/new year geme jam/mouses/green/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "tail", "bone": "root", "attachment": "tail" },
+	{ "name": "green copy", "bone": "root", "attachment": "green copy" }
+],
+"skins": {
+	"default": {
+		"tail": {
+			"tail": { "x": 750.5, "y": -222.5, "width": 643, "height": 71 }
+		},
+		"green copy": {
+			"green copy": { "x": 257.5, "y": -206.5, "width": 501, "height": 405 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

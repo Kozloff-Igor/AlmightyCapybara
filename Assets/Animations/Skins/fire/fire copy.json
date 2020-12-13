@@ -1,0 +1,20 @@
+{ "skeleton": { "images": "/d/informarion/creativity/art/projects/new year geme jam/mouses/fire/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "tail", "bone": "root", "attachment": "tail" },
+	{ "name": "fire copy", "bone": "root", "attachment": "fire copy" }
+],
+"skins": {
+	"default": {
+		"tail": {
+			"tail": { "x": 756.5, "y": -564.5, "width": 643, "height": 71 }
+		},
+		"fire copy": {
+			"fire copy": { "x": 264, "y": -544, "width": 500, "height": 394 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

@@ -1,0 +1,27 @@
+
+star copy.png
+size: 1961,443
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hat
+  rotate: false
+  xy: 2, 2
+  size: 136, 337
+  orig: 136, 337
+  offset: 0, 0
+  index: -1
+star copy
+  rotate: false
+  xy: 655, 2
+  size: 525, 439
+  orig: 525, 439
+  offset: 0, 0
+  index: -1
+tail
+  rotate: false
+  xy: 1308, 2
+  size: 651, 79
+  orig: 651, 79
+  offset: 0, 0
+  index: -1

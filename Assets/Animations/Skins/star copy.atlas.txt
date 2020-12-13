@@ -1,0 +1,48 @@
+
+star copy.png
+size: 1937,816
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fire/star copy
+  rotate: false
+  xy: 2, 2
+  size: 500, 394
+  orig: 500, 394
+  offset: 0, 0
+  index: -1
+fire/tail
+  rotate: false
+  xy: 647, 2
+  size: 643, 71
+  orig: 643, 71
+  offset: 0, 0
+  index: -1
+green/star copy
+  rotate: false
+  xy: 1292, 2
+  size: 501, 405
+  orig: 501, 405
+  offset: 0, 0
+  index: -1
+green/tail
+  rotate: false
+  xy: 2, 409
+  size: 643, 71
+  orig: 643, 71
+  offset: 0, 0
+  index: -1
+orange/star copy
+  rotate: false
+  xy: 647, 409
+  size: 504, 397
+  orig: 504, 397
+  offset: 0, 0
+  index: -1
+orange/tail
+  rotate: false
+  xy: 1292, 409
+  size: 643, 71
+  orig: 643, 71
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,20 @@
+{ "skeleton": { "images": "/d/informarion/creativity/art/projects/new year geme jam/mouses/orange/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "Layer 6", "bone": "root", "attachment": "Layer 6" },
+	{ "name": "orange copy", "bone": "root", "attachment": "orange copy" }
+],
+"skins": {
+	"default": {
+		"Layer 6": {
+			"Layer 6": { "x": 754.5, "y": -216.5, "width": 643, "height": 71 }
+		},
+		"orange copy": {
+			"orange copy": { "x": 260, "y": -202.5, "width": 504, "height": 397 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}
