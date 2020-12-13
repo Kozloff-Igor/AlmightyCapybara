@@ -48,8 +48,32 @@ public class Run : MonoBehaviour
                 growInNumbers.RemoveMouse(growInNumbers.activeMouses[Random.Range(1, growInNumbers.activeMouses.Count)]);
             }
         }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            FinishGame();
+        }
+           
 #endif
+        if (gameIsFinished)
+        {
+            CutSceneFinal();
+        }
+    }
 
+    bool gameIsFinished = false;
+    public void FinishGame()
+    {
+        foreach (Transform mouse in growInNumbers.activeMouses)
+        {
+            mouse.GetComponent<Collider2D>().enabled = false;
+        }
+        gameIsFinished = true;
+    }
+
+    void CutSceneFinal()
+    {
+        transform.localScale += Vector3.one * Time.deltaTime * 5f;
+        transform.Rotate(0f, 0f, 180f * Time.deltaTime);
     }
 
     void reloadlevel() { Application.LoadLevel(Application.loadedLevel); }
