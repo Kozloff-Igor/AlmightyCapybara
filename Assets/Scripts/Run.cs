@@ -68,6 +68,7 @@ public class Run : MonoBehaviour
             mouse.GetComponent<Collider2D>().enabled = false;
         }
         gameIsFinished = true;
+        FinalText.isEnd = true;
     }
 
     void CutSceneFinal()
