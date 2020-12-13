@@ -6678,6 +6678,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9202112283224905088, guid: a3d448c2ba7ff8b459d9dc9bcb0bb36c, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202112283224905088, guid: a3d448c2ba7ff8b459d9dc9bcb0bb36c, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9202112283224905090, guid: a3d448c2ba7ff8b459d9dc9bcb0bb36c, type: 3}
       propertyPath: m_RootOrder
       value: 3
