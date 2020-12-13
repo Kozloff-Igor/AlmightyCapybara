@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Spine.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,11 +18,13 @@ public class King : MonoBehaviour
     private Transform check;
     Rigidbody2D rb;
     Vector3 startPosition;
+    SkeletonAnimation animation;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         growInNumbers.SetTargetMouseRotations();
         startPosition = transform.position;
+        animation = GetComponentInChildren<SkeletonAnimation>();
     }
 
     // Update is called once per frame
@@ -71,8 +74,23 @@ public class King : MonoBehaviour
             {
                 needRotate = false;
                 rb.velocity = Vector2.zero;
+                if (animation.AnimationName != "idle")
+                {
+                    animation.AnimationName = "idle";
+                }
             }
-                
+
+            if (animation.AnimationName != "battle")
+            {
+                animation.AnimationName = "battle";
+            }
+        }
+        else
+        {
+            if (animation.AnimationName != "idle")
+            {
+                animation.AnimationName = "idle";
+            }
         }
     }
 
