@@ -42637,7 +42637,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760590340}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.96, y: 12.28, z: 0}
+  m_LocalPosition: {x: 18.83, y: 12.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1435570884}
@@ -60062,19 +60062,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8073945251540489551, guid: 74b751df82ab4644bac447589c4070da, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8073945251540489551, guid: 74b751df82ab4644bac447589c4070da, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8073945251540489551, guid: 74b751df82ab4644bac447589c4070da, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8073945251540489551, guid: 74b751df82ab4644bac447589c4070da, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8073945251540489551, guid: 74b751df82ab4644bac447589c4070da, type: 3}
       propertyPath: m_SizeDelta.x
@@ -60114,11 +60114,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8073945251540489551, guid: 74b751df82ab4644bac447589c4070da, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -856
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8073945251540489551, guid: 74b751df82ab4644bac447589c4070da, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 449
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 8073945251540489551, guid: 74b751df82ab4644bac447589c4070da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -122155,6 +122155,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1705243769}
     m_Modifications:
+    - target: {fileID: 3975812802634376474, guid: f122e4451e52f7c43bdc4b30ef0e756e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3975812802634376475, guid: f122e4451e52f7c43bdc4b30ef0e756e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.52
