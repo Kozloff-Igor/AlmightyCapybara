@@ -48,6 +48,10 @@ public class LineController : MonoBehaviour
                 lineRenderer.positionCount++;
             }
         }
+        else
+        {
+            StartLine(star);
+        }
     }
 
     private void Update()

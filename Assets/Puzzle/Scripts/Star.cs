@@ -8,12 +8,13 @@ public class Star : MonoBehaviour, IPointerEnterHandler
     
     public void OnPressed()
     {
-        FindObjectOfType<LineController>().StartLine(this);
+        //FindObjectOfType<LineController>().StartLine(this);
+        FindObjectOfType<LineController>().AddStar(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        FindObjectOfType<LineController>().AddStar(this);
+    //    FindObjectOfType<LineController>().AddStar(this);
     }
 
 
