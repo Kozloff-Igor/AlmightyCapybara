@@ -47,6 +47,13 @@ public class Strash : MonoBehaviour
     {
         foundPlayer = false;
         CheckRaycasts();
+        if (foundPlayer)
+        {
+            if (FindObjectOfType<Puzzle>().AAAAAAA.activeSelf)
+            {
+                foundPlayer = false;
+            }
+        }
 
         if (foundPlayer)
         {
