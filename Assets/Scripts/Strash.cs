@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Spine.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,8 +37,10 @@ public class Strash : MonoBehaviour
     float maxLookAroundTime = 5f;
 
     public Transform[] patrolPoints;
-    int currentPatrolPointId;    
+    int currentPatrolPointId;
 
+    SkeletonAnimation animation;
+    bool alarm;
     private void Update()
     {
         foundPlayer = false;
@@ -58,7 +61,9 @@ public class Strash : MonoBehaviour
         {
             ColorizeCones();
             oldRageFactor = rageFactor;
-        }        
+        }
+        alarm = foundPlayer;
+        CheckAnimations();
     }
 
     void CheckRaycasts()
@@ -156,6 +161,7 @@ public class Strash : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<Run>().transform;
+        animation = GetComponentInChildren<SkeletonAnimation>();
     }
 
     void Luch()
@@ -165,6 +171,26 @@ public class Strash : MonoBehaviour
         Vector3 difference = player.position - transform.position;
         float rotateZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         Physics2D.Raycast(Guard.position, Vector2.right * transform.localScale.z);
+    }
+
+    void CheckAnimations()
+    {
+        if (alarm)
+        {
+            if(animation.AnimationName != "ALERT!")
+                animation.AnimationName = "ALERT!";
+        }
+        else
+        {
+            if (status == Status.moving && animation.AnimationName != "walk")
+            {
+                animation.AnimationName = "walk";
+            }
+            if (status == Status.lookingAround && animation.AnimationName != "idle")
+            {
+                animation.AnimationName = "idle";
+            }
+        }
     }
 }
 
