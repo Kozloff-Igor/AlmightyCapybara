@@ -16,10 +16,12 @@ public class King : MonoBehaviour
     [SerializeField]
     private Transform check;
     Rigidbody2D rb;
+    Vector3 startPosition;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         growInNumbers.SetTargetMouseRotations();
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -107,5 +109,10 @@ public class King : MonoBehaviour
         }
 
         needRotate = _needRotate;
+    }
+
+    public void Reload()
+    {
+        transform.position = startPosition;
     }
 }
