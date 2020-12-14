@@ -52,7 +52,18 @@ public class Run : MonoBehaviour
         {
             FinishGame();
         }
-           
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log("Cheats editor-only");
+            Transform randMouse = growInNumbers.RandomFreeMouse();
+            if (randMouse)
+            {
+                growInNumbers.AddNewMouse(randMouse);
+            }
+            King king = FindObjectOfType<King>();
+            if (king) { king.enabled = false; }
+        }
+
 #endif
         if (gameIsFinished)
         {

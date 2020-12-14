@@ -68,10 +68,11 @@ public class Mouse : MonoBehaviour
                 {
                     if (mouseColorId == hittedMouse.mouseColorId)
                     {
-                        if (hittedMouse.growInNumbers)
+                        GrowInNumbers kingGrow = hittedMouse.growInNumbers;
+                        if (kingGrow)
                         {
-                            hittedMouse.growInNumbers.RemoveMouse(hittedMouse.transform);
-                            if (growInNumbers.activeMouses.Count == 0)
+                            kingGrow.RemoveMouse(hittedMouse.transform);
+                            if (kingGrow.activeMouses.Count == 0)
                             {
                                 FindObjectOfType<Run>().FinishGame();
                             }
