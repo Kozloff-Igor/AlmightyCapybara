@@ -55,12 +55,13 @@ public class LineController : MonoBehaviour
     }
 
     private void Update()
-    {
+    {     
         if (isDrawing)
         {
             var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, new Vector3(mousePosition.x, mousePosition.y, 0));
         }
+        lineRenderer.material.mainTextureOffset = Vector2.left * Time.time;
     }
 
     public void StartPuzzle()
